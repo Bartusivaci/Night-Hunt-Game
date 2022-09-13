@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public float jumpForce = 6f;
     public int attackCombo = 1;
     public bool isAttacking;
+    public bool isJumpAttacking;
 
     void Start()
     {
@@ -37,13 +38,13 @@ public class Player : MonoBehaviour
             animator.SetBool("Fall", false);
         }
 
-        if(rb.velocity.y > 0.001f)
+        if(rb.velocity.y > 0.001f && !isJumpAttacking)
         {
             animator.SetBool("Jump", true);
             animator.SetBool("Fall", false);
         }
 
-        if (rb.velocity.y < 0f)
+        if (rb.velocity.y < 0f && !isJumpAttacking)
         {
             animator.SetBool("Jump", false);
             animator.SetBool("Fall", true);
@@ -63,7 +64,9 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E) && !isGrounded)
         {
+            isJumpAttacking = true;
             animator.SetBool("JumpAttack", true);
+            Invoke("StopJumpAttacking", animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
         //animator.SetFloat("yVelocity", rb.velocity.y);
@@ -95,6 +98,12 @@ public class Player : MonoBehaviour
         rb.velocity = velocity;
 
         //animator.SetBool("Jump", true);
+    }
+
+    void StopJumpAttacking()
+    {
+        isJumpAttacking = false;
+        animator.SetBool("JumpAttack", false);
     }
 
     void Crouch()
