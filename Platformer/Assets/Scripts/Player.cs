@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
         {
             isJumpAttacking = true;
             animator.SetBool("JumpAttack", true);
+            SoundManager.instance.PlaySFX("Attack2");
             Invoke("StopJumpAttacking", animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
