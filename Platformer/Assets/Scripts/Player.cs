@@ -29,6 +29,26 @@ public class Player : MonoBehaviour
             Jump();
         }
 
+        Debug.Log(rb.velocity.y);
+
+        if(rb.velocity.y == 0f)
+        {
+            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", false);
+        }
+
+        if(rb.velocity.y > 0.001f)
+        {
+            animator.SetBool("Jump", true);
+            animator.SetBool("Fall", false);
+        }
+
+        if (rb.velocity.y < 0f)
+        {
+            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", true);
+        }
+
         AttackCombo();
 
         if(Input.GetKeyDown(KeyCode.C) && isGrounded)
@@ -43,10 +63,10 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E) && !isGrounded)
         {
-            animator.SetTrigger("JumpAttack");
+            animator.SetBool("JumpAttack", true);
         }
 
-        animator.SetFloat("yVelocity", rb.velocity.y);
+        //animator.SetFloat("yVelocity", rb.velocity.y);
     }
 
     void FixedUpdate()
@@ -61,9 +81,10 @@ public class Player : MonoBehaviour
         if (boxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             isGrounded = true;
+            animator.SetBool("Fall", false);
         }
 
-        animator.SetBool("Jump", !isGrounded);
+        //animator.SetBool("Jump", !isGrounded);
     }
 
 
@@ -73,7 +94,7 @@ public class Player : MonoBehaviour
         velocity.y = jumpForce;
         rb.velocity = velocity;
 
-        animator.SetBool("Jump", true);
+        //animator.SetBool("Jump", true);
     }
 
     void Crouch()
