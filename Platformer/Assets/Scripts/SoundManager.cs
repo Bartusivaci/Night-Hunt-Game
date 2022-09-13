@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource attack1;
     public AudioSource attack2;
     public AudioSource attack3;
+    public AudioSource crouch;
 
 
     public static SoundManager instance;
@@ -29,6 +30,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "Attack3":
                 attack3.Play();
+                break;
+            case "Crouch":
+                crouch.Play();
                 break;
         }
     }

@@ -31,25 +31,15 @@ public class Player : MonoBehaviour
 
         AttackCombo();
 
-        /*
-        if(Input.GetKeyDown(KeyCode.Q) && isGrounded)
+        if(Input.GetKeyDown(KeyCode.C) && isGrounded)
         {
-            animator.SetTrigger("Attack1");
-            SoundManager.instance.PlaySFX("Attack1");
+            Crouch();
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.R) && isGrounded)
         {
-            animator.SetTrigger("Attack2");
-            SoundManager.instance.PlaySFX("Attack2");
+            animator.SetTrigger("Roll");
         }
-
-        if (Input.GetKeyDown(KeyCode.E) && isGrounded)
-        {
-            animator.SetTrigger("Attack3");
-            SoundManager.instance.PlaySFX("Attack3");
-        }
-        */
 
         animator.SetFloat("yVelocity", rb.velocity.y);
     }
@@ -79,6 +69,12 @@ public class Player : MonoBehaviour
         rb.velocity = velocity;
 
         animator.SetBool("Jump", true);
+    }
+
+    void Crouch()
+    {
+        animator.SetTrigger("Crouch");
+        SoundManager.instance.PlaySFX("Crouch");
     }
 
     public void AttackCombo()
