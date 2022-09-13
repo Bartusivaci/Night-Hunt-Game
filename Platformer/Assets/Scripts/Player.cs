@@ -36,9 +36,14 @@ public class Player : MonoBehaviour
             Crouch();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.R) && isGrounded && !isAttacking)
         {
             animator.SetTrigger("Roll");
+        }
+
+        if(Input.GetKeyDown(KeyCode.E) && !isGrounded)
+        {
+            animator.SetTrigger("JumpAttack");
         }
 
         animator.SetFloat("yVelocity", rb.velocity.y);
