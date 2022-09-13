@@ -30,8 +30,6 @@ public class Player : MonoBehaviour
             Jump();
         }
 
-        Debug.Log(rb.velocity.y);
-
         if(rb.velocity.y == 0f)
         {
             animator.SetBool("Jump", false);
