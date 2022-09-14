@@ -60,11 +60,13 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Roll");
         }
 
-        if(Input.GetKeyDown(KeyCode.E) && !isGrounded)
+        if(Input.GetKeyDown(KeyCode.E) && !isGrounded && !isAttacking)
         {
             isJumpAttacking = true;
+            isAttacking = true;
             animator.SetBool("JumpAttack", true);
             SoundManager.instance.PlaySFX("Attack2");
+            PlayerCombat.instance.HitEnemies();
             Invoke("StopJumpAttacking", animator.GetCurrentAnimatorStateInfo(0).length);
         }
 
@@ -102,6 +104,7 @@ public class Player : MonoBehaviour
     void StopJumpAttacking()
     {
         isJumpAttacking = false;
+        isAttacking = false;
         animator.SetBool("JumpAttack", false);
     }
 
@@ -118,6 +121,7 @@ public class Player : MonoBehaviour
             isAttacking = true;
             animator.SetTrigger("Attack" + attackCombo);
             SoundManager.instance.PlaySFX("Attack" + attackCombo);
+            PlayerCombat.instance.HitEnemies();
         }
     }
 
