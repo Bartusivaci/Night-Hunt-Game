@@ -143,8 +143,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
-        //play take damage animation
+        animator.SetTrigger("Take Damage");
         //lower health
-        //play take damage sfx
     }
 }

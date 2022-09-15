@@ -880,6 +880,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  projectileLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   damage: 100
 --- !u!1 &1126360512
 GameObject:
