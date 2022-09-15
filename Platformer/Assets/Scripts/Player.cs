@@ -144,6 +144,7 @@ public class Player : MonoBehaviour
     public void TakeDamage()
     {
         animator.SetTrigger("Take Damage");
+        SoundManager.instance.PlaySFX("DamageHitSound");
         //lower health
     }
 }

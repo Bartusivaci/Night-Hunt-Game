@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        SoundManager.instance.PlaySFX("SwordFlying");
     }
 
     void Update()
@@ -26,7 +27,6 @@ public class Projectile : MonoBehaviour
         if(collision.gameObject.layer == PLAYER_LAYER)
         {
             animator.SetTrigger("hitPlayer");
-            SoundManager.instance.PlaySFX("SwordHitSound");
             collision.GetComponent<Player>().TakeDamage();
             Destroy(gameObject, projectileDestroyTime);
         }

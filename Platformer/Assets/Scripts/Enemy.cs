@@ -17,9 +17,11 @@ public class Enemy : MonoBehaviour
     private int currentHealth;
     private Animator animator;
     private bool isProjectileThrown = false;
+    private bool isDamageGiven = false;
     
 
     private const int DEAD_LAYER = 8;
+    private const int PLAYER_LAYER = 9;
 
 
     void Start()
@@ -71,6 +73,20 @@ public class Enemy : MonoBehaviour
         else
         {
             animator.SetBool("Attack", false);
+        }
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == PLAYER_LAYER)
+        {
+            if (!isDamageGiven)
+            {
+                collision.collider.GetComponent<Player>().TakeDamage();
+                isDamageGiven = true;
+                HandleDeath();
+            }
         }
     }
 }

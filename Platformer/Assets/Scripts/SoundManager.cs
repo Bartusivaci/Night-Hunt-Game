@@ -9,7 +9,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource attack3;
     public AudioSource crouch;
     public AudioSource skeletonDying;
-    public AudioSource swordHitSound;
+    public AudioSource damageHitSound;
+    public AudioSource swordFlying;
 
 
     public static SoundManager instance;
@@ -39,8 +40,11 @@ public class SoundManager : MonoBehaviour
             case "SkeletonDying":
                 skeletonDying.Play();
                 break;
-            case "SwordHitSound":
-                swordHitSound.Play();
+            case "DamageHitSound":
+                damageHitSound.Play();
+                break;
+            case "SwordFlying":
+                swordFlying.Play();
                 break;
         }
     }
