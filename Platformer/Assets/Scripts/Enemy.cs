@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     
     public float walkSpeed = 2f;
     public int maxHealth = 100;
-    public Transform player;
     public float agroRange = 3f;
 
     public Transform firePosition;
@@ -16,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     private int currentHealth;
     private Animator animator;
+    private Transform player;
     private bool isProjectileThrown = false;
     private bool isDamageGiven = false;
     
@@ -29,6 +29,8 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
 
         animator = GetComponent<Animator>();
+
+        player = FindObjectOfType<Player>().GetComponent<Transform>();
     }
 
     void Update()
