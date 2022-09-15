@@ -139,4 +139,12 @@ public class Player : MonoBehaviour
         isAttacking = false;
         attackCombo = 1;
     }
+
+
+    public void TakeDamage()
+    {
+        //play take damage animation
+        //lower health
+        //play take damage sfx
+    }
 }

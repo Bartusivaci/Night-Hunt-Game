@@ -8,10 +8,15 @@ public class Enemy : MonoBehaviour
     public float walkSpeed = 2f;
     public int maxHealth = 100;
     public Transform player;
-    public float agroRange = 3f; 
+    public float agroRange = 3f;
+
+    public Transform firePosition;
+    public GameObject projectile;
+
 
     private int currentHealth;
     private Animator animator;
+    private bool isProjectileThrown = false;
     
 
     private const int DEAD_LAYER = 8;
@@ -57,6 +62,11 @@ public class Enemy : MonoBehaviour
         if(transform.position.x > player.position.x)
         {
             animator.SetBool("Attack", true);
+            if (!isProjectileThrown)
+            {
+                Instantiate(projectile, firePosition.position, firePosition.rotation);
+                isProjectileThrown = true;
+            }          
         }
         else
         {
