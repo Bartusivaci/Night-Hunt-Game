@@ -15,17 +15,28 @@ public class Player : MonoBehaviour
     public bool isAttacking;
     public bool isJumpAttacking;
 
+    public int maxHealth = 3;
+    private int currentHealth;
+
+    public SpriteRenderer[] livesSprites;
+    public Sprite emptyHeart;
+
+    private bool isAlive;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+
+        currentHealth = maxHealth;
+        isAlive = true;
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && isAlive)
         {
             Jump();
         }
@@ -50,17 +61,17 @@ public class Player : MonoBehaviour
 
         AttackCombo();
 
-        if(Input.GetKeyDown(KeyCode.C) && isGrounded)
+        if(Input.GetKeyDown(KeyCode.C) && isGrounded && isAlive)
         {
             Crouch();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && isGrounded && !isAttacking)
+        if (Input.GetKeyDown(KeyCode.R) && isGrounded && !isAttacking && isAlive)
         {
             animator.SetTrigger("Roll");
         }
 
-        if(Input.GetKeyDown(KeyCode.E) && !isGrounded && !isAttacking)
+        if(Input.GetKeyDown(KeyCode.E) && !isGrounded && !isAttacking && isAlive)
         {
             isJumpAttacking = true;
             isAttacking = true;
@@ -116,7 +127,7 @@ public class Player : MonoBehaviour
 
     public void AttackCombo()
     {
-        if(Input.GetKeyDown(KeyCode.E) && !isAttacking && isGrounded)
+        if(Input.GetKeyDown(KeyCode.E) && !isAttacking && isGrounded && isAlive)
         {
             isAttacking = true;
             animator.SetTrigger("Attack" + attackCombo);
@@ -144,8 +155,22 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
-        animator.SetTrigger("Take Damage");
-        SoundManager.instance.PlaySFX("DamageHitSound");
-        //lower health
+        if (isAlive)
+        {
+            animator.SetTrigger("Take Damage");
+            SoundManager.instance.PlaySFX("DamageHitSound");
+
+            currentHealth--;
+            livesSprites[currentHealth].sprite = emptyHeart;
+        }
+
+        if(currentHealth <= 0)
+        {
+            currentHealth = 0;
+            isAlive = false;
+            animator.SetTrigger("Death");
+            // apply left force
+            //load scene
+        }
     }
 }
