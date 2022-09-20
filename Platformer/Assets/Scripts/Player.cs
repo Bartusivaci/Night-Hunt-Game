@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using EZCameraShake;
 
 public class Player : MonoBehaviour
 {
@@ -169,6 +170,7 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("Take Damage");
             SoundManager.instance.PlaySFX("DamageHitSound");
+            CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, 1f);
 
             currentHealth--;
             livesSprites[currentHealth].sprite = emptyHeart;
