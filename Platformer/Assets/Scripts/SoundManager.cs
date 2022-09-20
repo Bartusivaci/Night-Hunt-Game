@@ -12,12 +12,34 @@ public class SoundManager : MonoBehaviour
     public AudioSource damageHitSound;
     public AudioSource swordFlying;
 
+    public AudioSource gameMusic;
+
 
     public static SoundManager instance;
 
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+        
+    }
+
+    public void StartPlayingGameMusic()
+    {
+        gameMusic.Play();
+    }
+
+    public void StopPlayingGameMusic()
+    {
+        gameMusic.Stop();
     }
 
 

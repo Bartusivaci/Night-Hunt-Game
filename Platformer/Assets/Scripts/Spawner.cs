@@ -7,10 +7,14 @@ public class Spawner : MonoBehaviour
     public GameObject skeletonPrefab;
     public float maxSkeletonInterval = 6f;
 
+    public GameObject mushroomPrefab;
+    public float maxMushroomInterval = 12f;
+
 
     void Start()
     {
         StartCoroutine(SpawnEnemies(skeletonPrefab, maxSkeletonInterval));
+        StartCoroutine(SpawnEnemies(mushroomPrefab, maxMushroomInterval));
     }
 
 
