@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 998236382}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -649,6 +649,8 @@ MonoBehaviour:
   - {fileID: 111809576}
   - {fileID: 1888856053}
   emptyHeart: {fileID: -8880520576215733831, guid: 497877696662aee47ba7434638be1ea7, type: 3}
+  dragSpeed: 2.5
+  sceneLoadDelay: 3
 --- !u!114 &998236382
 MonoBehaviour:
   m_ObjectHideFlags: 0

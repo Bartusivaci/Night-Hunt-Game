@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class Player : MonoBehaviour
     public Sprite emptyHeart;
 
     private bool isAlive;
+    public float dragSpeed = 2.5f;
+    public float sceneLoadDelay = 3f;
+
+    private const int DEAD_LAYER = 8;
 
     void Start()
     {
@@ -79,6 +84,11 @@ public class Player : MonoBehaviour
             SoundManager.instance.PlaySFX("Attack2");
             PlayerCombat.instance.HitEnemies();
             Invoke("StopJumpAttacking", animator.GetCurrentAnimatorStateInfo(0).length);
+        }
+
+        if (!isAlive)
+        {
+            transform.Translate(Vector2.left * Time.deltaTime * dragSpeed);
         }
 
         //animator.SetFloat("yVelocity", rb.velocity.y);
@@ -169,8 +179,15 @@ public class Player : MonoBehaviour
             currentHealth = 0;
             isAlive = false;
             animator.SetTrigger("Death");
-            // apply left force
-            //load scene
+            gameObject.layer = DEAD_LAYER;
+            StartCoroutine(SceneLoadWithDelay());
         }
+    }
+
+
+    IEnumerator SceneLoadWithDelay()
+    {
+        yield return new WaitForSeconds(sceneLoadDelay);
+        SceneManager.LoadScene("Menu Scene");
     }
 }
