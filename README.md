@@ -27,7 +27,7 @@ Night Hunt is a 2D endless runner game. Your goal is to avoid or kill the enemie
 
 [<img src="https://cms.simmer.io/content/images/2019/08/simmer-badge-super-high-resolution-2.png" width=200px>](https://simmer.io/@bartu/night-hunt)
 
-[<img src="https://static.itch.io/images/badge.svg" width=200px>](https://bartusivaci.itch.io/saving-gargantua)
+[<img src="https://static.itch.io/images/badge.svg" width=200px>](https://bartusivaci.itch.io/night-hunt)
 
 ## CREDITS:
 
